@@ -1,3 +1,5 @@
+# Libraries used
+
 import streamlit as st
 import tweepy
 from textblob import TextBlob
@@ -8,6 +10,3 @@ import re
 import matplotlib.pyplot as plt
 from PIL import Image
 import seaborn as sns
-
-
-
