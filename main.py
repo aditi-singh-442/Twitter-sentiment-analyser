@@ -1,16 +1,13 @@
-
 import streamlit as st
 import tweepy
+import re
 from textblob import TextBlob
 from wordcloud import WordCloud
 import pandas as pd
 import numpy as np
-import re
 import matplotlib.pyplot as plt
 from PIL import Image
 import seaborn as sns
-
-
 
 consumerKey = 0#confidential
 consumerSecret = 00#confidential
@@ -18,74 +15,40 @@ accessToken = 0#confidential
 accessTokenSecret = 0#confidential
 
 
-#Create the authentication object
+#Authenticate the object
 authenticate = tweepy.OAuthHandler(consumerKey, consumerSecret) 
     
-# Set the access token and access token secret
+# Set the access token and secret
 authenticate.set_access_token(accessToken, accessTokenSecret) 
     
-# Creating the API object while passing in auth information
+# Create the API object while passing authenticating information
 api = tweepy.API(authenticate, wait_on_rate_limit = True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #plt.style.use('fivethirtyeight')
 
-
-
-
-
-
-
-
-
-
 def app():
 
+    st.title("Analyze Tweets")
 
+    activities=["Tweets Analyzer","Generate Twitter Data"]
 
-    st.title("Tweet Analyzer 🔥")
+    choice = st.sidebar.selectbox("Select",activities)
 
-
-    activities=["Tweet Analyzer","Generate Twitter Data"]
-
-    choice = st.sidebar.selectbox("Select Your Activity",activities)
-
-	
 
     if choice=="Tweet Analyzer":
 
-        st.subheader("Analyze the tweets of your favourite Personalities")
+        st.subheader("Analyze the tweets")
 
-        st.subheader("This tool performs the following tasks :")
+        st.subheader("Tasks accomplished :")
 
-        st.write("1. Fetches the 5 most recent tweets from the given twitter handel")
-        st.write("2. Generates a Word Cloud")
-        st.write("3. Performs Sentiment Analysis a displays it in form of a Bar Graph")
-
-
-        
+        st.write("• Fetch the 5 most recent tweets from the twitter handle")
+        st.write("• Generate Word Cloud")
+        st.write("• Perform Sentiment Analysis")
 
 
-        raw_text = st.text_area("Enter the exact twitter handle of the Personality (without @)")
+        raw_text = st.text_area("Enter the twitter handle of the Person (exclude @) :")
 
-
-
-        st.markdown("<--------     Also Do checkout the another cool tool from the sidebar")
-
-        Analyzer_choice = st.selectbox("Select the Activities",  ["Show Recent Tweets","Generate WordCloud" ,"Visualize the Sentiment Analysis"])
+        Analyzer_choice = st.selectbox("Selection Box",  ["Show Recent Tweets","Generate WordCloud" ,"Visualize the Sentiment Analysis"])
 
 
         if st.button("Analyze"):
@@ -93,7 +56,7 @@ def app():
             
             if Analyzer_choice == "Show Recent Tweets":
 
-                st.success("Fetching last 5 Tweets")
+                st.success("Fetching 5 most recent Tweets")
 
                 
                 def Show_Recent_Tweets(raw_text):
@@ -122,7 +85,7 @@ def app():
 
             elif Analyzer_choice=="Generate WordCloud":
 
-                st.success("Generating Word Cloud")
+                st.success("Generating")
 
                 def gen_wordcloud():
 
@@ -147,8 +110,6 @@ def app():
 
 
             else:
-
-
 
                 
                 def Plot_Analysis():
@@ -221,22 +182,20 @@ def app():
 
     else:
 
-        st.subheader("This tool fetches the last 100 tweets from the twitter handel & Performs the following tasks")
+        st.subheader("Task is to fetch the last 100 tweets from the twitter handle and :")
 
-        st.write("1. Converts it into a DataFrame")
-        st.write("2. Cleans the text")
-        st.write("3. Analyzes Subjectivity of tweets and adds an additional column for it")
-        st.write("4. Analyzes Polarity of tweets and adds an additional column for it")
-        st.write("5. Analyzes Sentiments of tweets and adds an additional column for it")
-
-
+        st.write("• Convert to DataFrame")
+        st.write("• Clean the text")
+        st.write("• Analyze Subjectivity of tweets")
+        st.write("• Analyze Polarity of tweets")
+        st.write("• Analyze Sentiments of tweets")
 
 
 
 
-        user_name = st.text_area("*Enter the exact twitter handle of the Personality (without @)*")
 
-        st.markdown("<--------     Also Do checkout the another cool tool from the sidebar")
+
+        user_name = st.text_area("*Enter the twitter handle (without @)*")
 
         def get_data(user_name):
 
@@ -296,7 +255,7 @@ def app():
 
 
 
-    st.subheader(' ------------------------Created By :  HARIT SHANDILYA ---------------------- :sunglasses:')
+    st.subheader(' --------------------computer geeks-------------------- ')
 
 
             
